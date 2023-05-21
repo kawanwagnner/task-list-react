@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-
-import Header from "./components/Header";
-import Tasks from "./components/Tasks";
-import AddTask from "./components/AddTask";
-import TaskDetails from "./components/TaskDetails";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TaskDetails from "./pages/TaskDetails/TaskDetails";
 
 import "./App.css";
+import Header from "./components/Header/Header";
+import Tasks from "./components/Tasks/Tasks";
+import AddTask from "./components/Tasks/AddTask/AddTask";
 
 const App = () => {
+  const [viewInfo, setViewInfo] = useState();
   const [tasks, setTasks] = useState([
     {
       id: "1",
@@ -33,17 +33,23 @@ const App = () => {
     setTasks(newTasks);
   };
 
-  const handleTasksAdition = (tasksTitle) => {
-    const newTasks = [
+  const handleTasksAdition = (tasksTitle, description) => {
+    debugger; 
+    if (tasksTitle.length > 0) {
+      const newTasks = [
       ...tasks,
       {
-        title: tasksTitle,
-        id: uuidv4(),
-        completed: false,
-      },
-    ];
-
-    setTasks(newTasks);
+          title: tasksTitle,
+          description: description,
+          id: uuidv4(),
+          completed: false,
+          date: new Date()
+        },
+      ];
+      setTasks(newTasks);
+    } else {
+      alert("Campo precisa ser preenchido. :(");
+    }
   };
 
   const handleTasksDeletion = (tasksId) => {
@@ -53,26 +59,28 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <div className="container">
-        <Header />
-        <Route
-          path="/"
-          exact
-          render={() => (
-            <>
-              <AddTask handleTasksAdition={handleTasksAdition} />
-              <Tasks
-                tasks={tasks}
-                handleTaskClick={handleTaskClick}
-                handleTasksDeletion={handleTasksDeletion}
-              />
-            </>
-          )}
-        />
-        <Route path="/:taskTitle" exact Component={TaskDetails} />
-      </div>
-    </Router>
+    <div className="container">
+      <Header />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <AddTask handleTasksAdition={handleTasksAdition} />
+                <Tasks
+                  tasks={tasks}
+                  handleTaskClick={handleTaskClick}
+                  handleTasksDeletion={handleTasksDeletion}
+                  setViewInfo={setViewInfo}
+                />
+              </>
+            }
+          />
+          <Route path="/task-details/:id" element={<TaskDetails viewInfo={viewInfo}/>} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 };
 

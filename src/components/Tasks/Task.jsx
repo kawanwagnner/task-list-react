@@ -1,9 +1,10 @@
 import React from "react";
 import { CgClose, CgInfo } from "react-icons/cg";
-
 import "./Task.css";
+import moment from "moment/moment";
+import 'moment/locale/pt'; 
 
-const Task = ({ task, handleTaskClick, handleTasksDeletion }) => {
+const Task = ({ task, handleTaskClick, handleTasksDeletion, viewTaskById }) => {
   return (
     <div
       className="task-container"
@@ -11,6 +12,9 @@ const Task = ({ task, handleTaskClick, handleTasksDeletion }) => {
     >
       <div className="task-title" onClick={() => handleTaskClick(task.id)}>
         {task.title}
+      </div>
+      <div style={{fontSize: '10px'}}>
+        {task.date ? moment(task.date).locale('pt').format('lll') : ''}
       </div>
 
       <div className="buttons-container">
@@ -21,7 +25,7 @@ const Task = ({ task, handleTaskClick, handleTasksDeletion }) => {
           <CgClose />
         </button>
         <button
-          // onClick={}
+          onClick={() => viewTaskById(task.id)}
           className="see-task-details-button"
         >
           <CgInfo />
