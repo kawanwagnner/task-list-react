@@ -13,12 +13,16 @@ const App = () => {
   const [tasks, setTasks] = useState([
     {
       id: "1",
-      title: "Estudar Prgramação",
+      title: "Estudar Programação",
+      description:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem possimus rem doloremque nisi. Eveniet, iure!",
       completed: false,
     },
     {
       id: "2",
       title: "Ler 10 Páginas",
+      description:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Autem possimus rem doloremque nisi. Eveniet, iure!",
       completed: true,
     },
   ]);
@@ -34,21 +38,20 @@ const App = () => {
   };
 
   const handleTasksAdition = (tasksTitle, description) => {
-    debugger; 
     if (tasksTitle.length > 0) {
       const newTasks = [
-      ...tasks,
-      {
+        ...tasks,
+        {
           title: tasksTitle,
           description: description,
           id: uuidv4(),
           completed: false,
-          date: new Date()
+          date: new Date(),
         },
       ];
       setTasks(newTasks);
     } else {
-      alert("Campo precisa ser preenchido. :(");
+      alert("ʕ•́ᴥ•̀ʔっ >>Os campos precisam ser preenchidos.");
     }
   };
 
@@ -77,7 +80,10 @@ const App = () => {
               </>
             }
           />
-          <Route path="/task-details/:id" element={<TaskDetails viewInfo={viewInfo}/>} />
+          <Route
+            path="/task-details/:id"
+            element={<TaskDetails viewInfo={viewInfo} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

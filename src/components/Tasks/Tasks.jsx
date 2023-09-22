@@ -20,21 +20,29 @@ const Tasks = ({
 
   return (
     <>
-      {
-        tasks.length === 0 ?
-          <p style={{ fontSize: '20px', textAlign: 'center', color: '#595959'}}>Lista de tarefas vazia.</p>
-          :
-          <>
-            {tasks.map((task) => (
-              <Task
-                task={task}
-                handleTaskClick={handleTaskClick}
-                handleTasksDeletion={handleTasksDeletion}
-                viewTaskById={viewTaskById}
-              />
-            ))}
-          </>
-      }
+      {tasks.length === 0 ? (
+        <h3
+          style={{
+            fontSize: "25px",
+            textAlign: "center",
+            color: "#595959",
+            margin: "50px 0 50px 0",
+          }}
+        >
+          Lista de tarefas vazia. (╥﹏╥)
+        </h3>
+      ) : (
+        <>
+          {tasks.map((task) => (
+            <Task
+              task={task}
+              handleTaskClick={handleTaskClick}
+              handleTasksDeletion={handleTasksDeletion}
+              viewTaskById={viewTaskById}
+            />
+          ))}
+        </>
+      )}
     </>
   );
 };

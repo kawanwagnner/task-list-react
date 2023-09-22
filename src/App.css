@@ -1,7 +1,7 @@
 .container {
   max-width: 550px;
   min-height: 300px;
-  margin: 20px auto;
+  margin: 50px auto;
   overflow: auto;
   border: 2px solid chartreuse;
   border-radius: 5px;

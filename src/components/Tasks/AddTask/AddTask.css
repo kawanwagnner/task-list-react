@@ -2,20 +2,32 @@
   margin: 20px 0px;
   padding: 0 20px;
   width: 100%;
-  flex-wrap: wrap;
-  display: flex;
+  margin: 10px auto;
 }
 
-.add-task-input {
+.add-task-input,
+.add-description-input {
   height: 40px;
   padding: 0 10px;
   border-radius: 5px;
   border: none;
-  margin: 6px;
+  margin: 10px auto;
+  text-align: center;
   flex: 2;
+  padding: 10px;
   background-color: #444;
   color: #eee;
   font-size: 16px;
+  display: block;
+  width: 100%;
+}
+
+.add-description-input {
+  max-width: 506px;
+  min-width: 215px;
+  max-height: 200px;
+  /* width: 100%; */
+  height: 10%;
 }
 
 .add-task-button {
@@ -24,6 +36,6 @@
 }
 
 label {
-  color: white; 
+  color: white;
   display: block;
 }
