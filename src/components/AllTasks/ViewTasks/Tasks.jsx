@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import Task from "./Task";
+import Task from "../ViewTasks/Task";
 
 const Tasks = ({
   tasks,

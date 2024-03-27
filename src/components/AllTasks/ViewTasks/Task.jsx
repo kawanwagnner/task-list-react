@@ -1,10 +1,18 @@
 import React from "react";
 import { CgClose, CgInfo } from "react-icons/cg";
-import "./Task.css";
 import moment from "moment/moment";
-import 'moment/locale/pt'; 
+import "moment/locale/pt";
+import { useNavigate } from "react-router-dom";
 
-const Task = ({ task, handleTaskClick, handleTasksDeletion, viewTaskById }) => {
+import "../ViewTasks/Task.css";
+
+const Task = ({ task, handleTaskClick, handleTasksDeletion }) => {
+  const navigate = useNavigate();
+
+  const handleSeeTaskDetails = () => {
+    navigate(`task-details/${task.id}`);
+  };
+
   return (
     <div
       className="task-container"
@@ -13,8 +21,8 @@ const Task = ({ task, handleTaskClick, handleTasksDeletion, viewTaskById }) => {
       <div className="task-title" onClick={() => handleTaskClick(task.id)}>
         {task.title}
       </div>
-      <div style={{fontSize: '10px'}}>
-        {task.date ? moment(task.date).locale('pt').format('lll') : ''}
+      <div style={{ fontSize: "10px" }}>
+        {task.date ? moment(task.date).locale("pt").format("lll") : ""}
       </div>
 
       <div className="buttons-container">
@@ -25,7 +33,7 @@ const Task = ({ task, handleTaskClick, handleTasksDeletion, viewTaskById }) => {
           <CgClose />
         </button>
         <button
-          onClick={() => viewTaskById(task.id)}
+          onClick={handleSeeTaskDetails}
           className="see-task-details-button"
         >
           <CgInfo />
@@ -33,7 +41,6 @@ const Task = ({ task, handleTaskClick, handleTasksDeletion, viewTaskById }) => {
       </div>
     </div>
   );
-  // return <div className="task-container">{task.title}</div>
 };
 
 export default Task;
